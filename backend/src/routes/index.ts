@@ -1,9 +1,12 @@
 import { Router } from "express";
+import cors from "cors";
 import * as items from "./items";
 
-const router = Router()
+const router = Router();
 
-router.get('/items', items.list);
-//router.get('/items/:id', );
+router.use(cors());
 
-export { router }
+router.get("/items", items.list);
+router.get("/items/:id", items.detail);
+
+export { router };
