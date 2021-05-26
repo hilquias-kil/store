@@ -3,18 +3,18 @@ import { app } from "./app";
 
 describe("App requests", () => {
   it("should get a json with the author and items property", async () => {
-    const res = await request(app).get("/items");
+    const res = await request(app).get("/api/items");
     expect(res.body).toHaveProperty("author");
     expect(res.body).toHaveProperty("items");
   });
 
   it("should get 4 items in the payload when sending a term", async () => {
-    const res = await request(app).get("/items?search=iphone");
+    const res = await request(app).get("/api/items?q=iphone");
     expect(res.body.items).toHaveLength(4);
   });
 
   it("should get a json with the author and items property when product detail", async () => {
-    const res = await request(app).get("/items/MLA921510488");
+    const res = await request(app).get("/api/items/MLA921510488");
     expect(res.body).toHaveProperty("author");
     expect(res.body).toHaveProperty("item");
   });
