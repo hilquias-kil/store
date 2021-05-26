@@ -1,7 +1,7 @@
 import axios from "axios";
 import "dotenv/config";
 
-const API = process.env.API_URL;
+const API = process.env.API_URL || "https://api.mercadolibre.com";
 
 function getDetail(id: string) {
   return axios.get(`${API}/items/${id}`);

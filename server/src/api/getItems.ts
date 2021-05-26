@@ -1,10 +1,11 @@
 import axios from "axios";
 import "dotenv/config";
 
-const API = process.env.API_URL;
+const API = process.env.API_URL || "https://api.mercadolibre.com";
 const amount = 4;
 
 function getItems(query: string) {
+  console.log(`${API}/sites/MLA/search`);
   return axios
     .get(`${API}/sites/MLA/search`, {
       params: {
