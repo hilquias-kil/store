@@ -8,6 +8,7 @@ import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import { Content, Container } from '@/components/Layout/Layout'
 import Product from '@/components/Product/Product'
 import Loading from '@/components/Loading/Loading'
+import ErrorMessage from '@/components/ErrorMessage/ErrorMessage'
 
 // hooks
 import { useFetch } from '@/hooks/useFetch'
@@ -17,8 +18,8 @@ import ProductEntity from '@/entities/productList'
 
 export default function Home(): JSX.Element {
   const router = useRouter()
-  const { data } = useFetch<ProductEntity>(
-    `items?search=${router.query.search}`
+  const { data, loading, error } = useFetch<ProductEntity>(
+    `items?q=${router.query.q}`
   )
 
   return (
@@ -33,11 +34,9 @@ export default function Home(): JSX.Element {
         <Content>
           {data && <Breadcrumb categories={data.categories} />}
           <Container>
-            {data ? (
-              data?.items.map(it => <Product key={it.id} {...it} />)
-            ) : (
-              <Loading />
-            )}
+            {data && data?.items.map(it => <Product key={it.id} {...it} />)}
+            {loading && <Loading />}
+            {error && <ErrorMessage />}
           </Container>
         </Content>
       </main>

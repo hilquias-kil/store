@@ -11,6 +11,7 @@ const Price: React.FC<PriceProps> = ({ large, amount }) => (
     {amount.toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD',
+      minimumFractionDigits: large ? 2 : 0,
       maximumFractionDigits: large ? 2 : 0
     })}
   </PriceContainer>

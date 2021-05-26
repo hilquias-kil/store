@@ -8,7 +8,7 @@ jest.mock('next/router', () => ({
   __esModule: true,
   useRouter: () => ({
     push: url => {
-      expect(url).toBe('/items?search=iphone')
+      expect(url).toBe('/items?q=iphone')
     }
   })
 }))
@@ -19,6 +19,5 @@ it('should render Breadcrumb with step 1 and 2', () => {
   )
   expect(getByAltText('Mercado Libre')).toBeInTheDocument()
   userEvent.type(getByPlaceholderText('Nunca dejes de buscar'), 'iphone')
-  getByText('Busca')
   userEvent.click(getByText('Busca'))
 })

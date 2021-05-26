@@ -3,7 +3,7 @@ import getItems from "../api/getItems";
 import getItemsDetail from "../api/getItemsDetail";
 
 export async function list(req: Request, res: Response) {
-  const search: string = req.query.search as string;
+  const search: string = req.query.q as string;
   const data = await getItems(search);
   return res.json(data);
 }

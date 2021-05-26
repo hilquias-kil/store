@@ -1,9 +1,10 @@
-import React from 'react'
-import { render } from '@testing-library/react'
+import React, { ReactElement } from 'react'
+import { render, RenderResult } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import theme from '../styles/theme'
 
-const renderComponent = (Component: React.ReactChild) =>
-  render(<ThemeProvider theme={theme}>{Component}</ThemeProvider>)
+function renderComponent(Component: ReactElement): RenderResult {
+  return render(<ThemeProvider theme={theme}>{Component}</ThemeProvider>)
+}
 
 export default renderComponent

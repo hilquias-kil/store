@@ -15,6 +15,7 @@ import {
 } from '@/components/ProductLayout/ProductLayout'
 import { BuyButton } from '@/components/BuyButton/BuyButton'
 import Loading from '@/components/Loading/Loading'
+import ErrorMessage from '@/components/ErrorMessage/ErrorMessage'
 
 // hooks
 import { useFetch } from '@/hooks/useFetch'
@@ -25,7 +26,7 @@ import ProductDetailEntity from '@/entities/productDetail'
 export default function Product(): JSX.Element {
   const router = useRouter()
   const { id } = router.query
-  const { data } = useFetch<ProductDetailEntity>(`items/${id}`)
+  const { data, loading, error } = useFetch<ProductDetailEntity>(`items/${id}`)
   const { item: product } = data || {}
 
   return (
@@ -39,7 +40,7 @@ export default function Product(): JSX.Element {
         <Header />
         <Content>
           <Container>
-            {data ? (
+            {data && (
               <ProductLayout>
                 <div className="row">
                   <div className="col">
@@ -65,9 +66,9 @@ export default function Product(): JSX.Element {
                   <p>{product.description}</p>
                 </ProductDescription>
               </ProductLayout>
-            ) : (
-              <Loading />
             )}
+            {loading && <Loading />}
+            {error && <ErrorMessage />}
           </Container>
         </Content>
       </main>

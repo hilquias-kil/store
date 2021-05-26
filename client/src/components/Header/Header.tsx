@@ -7,7 +7,7 @@ const Header: React.FC = () => {
   const router = useRouter()
 
   const handle = term => {
-    router.push(`/items?search=${term}`)
+    router.push(`/items?q=${term}`)
   }
 
   return (
